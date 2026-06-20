@@ -2,43 +2,23 @@
 
 import useSWR from 'swr';
 import type { Instrument, OHLCVBar } from '@/types/market';
+import { parseCsv } from '@/lib/csvParser';
 
-function buildTiingoUrl(instrument: Instrument): string {
-  const token = process.env.NEXT_PUBLIC_TIINGO_API_KEY ?? '';
-  const start = new Date();
-  start.setFullYear(start.getFullYear() - 1);
-  const startDate = start.toISOString().slice(0, 10);
-
-  if (instrument.type === 'forex') {
-    return `https://api.tiingo.com/tiingo/fx/${instrument.ticker}/prices?startDate=${startDate}&resampleFreq=1day&token=${token}`;
-  }
-  return `https://api.tiingo.com/tiingo/daily/${instrument.ticker}/prices?startDate=${startDate}&token=${token}`;
-}
-
-function normalizeBar(bar: Record<string, unknown>): OHLCVBar {
-  return {
-    time: (bar.date as string).slice(0, 10),
-    open: bar.open as number,
-    high: bar.high as number,
-    low: bar.low as number,
-    close: bar.close as number,
-    volume: bar.volume as number | undefined,
-  };
-}
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 const fetcher = (url: string): Promise<OHLCVBar[]> =>
   fetch(url)
     .then((r) => {
-      if (!r.ok) throw new Error(`Fetch failed: ${r.status}`);
-      return r.json();
+      if (!r.ok) throw new Error(`Failed to load ${url}: ${r.status}`);
+      return r.text();
     })
-    .then((raw: Record<string, unknown>[]) => raw.map(normalizeBar));
+    .then(parseCsv);
 
 export function useChartData(instrument: Instrument) {
-  const url = buildTiingoUrl(instrument);
-  const { data, error, isLoading } = useSWR<OHLCVBar[]>(url, fetcher, {
+  const csvUrl = `${BASE}/data/${instrument.ticker}.csv`;
+  const { data, error, isLoading } = useSWR<OHLCVBar[]>(csvUrl, fetcher, {
     revalidateOnFocus: false,
-    dedupingInterval: 300_000,
+    dedupingInterval: 60 * 60 * 1000,
   });
   return { data, error, isLoading };
 }
