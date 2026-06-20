@@ -27,7 +27,7 @@ function normalizeBar(bar: Record<string, unknown>): OHLCVBar {
 }
 
 const fetcher = (url: string): Promise<OHLCVBar[]> =>
-  fetch(url, { headers: { 'Content-Type': 'application/json' } })
+  fetch(url)
     .then((r) => {
       if (!r.ok) throw new Error(`Fetch failed: ${r.status}`);
       return r.json();
