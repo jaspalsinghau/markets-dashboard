@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "fetch-data": "node scripts/fetch-data.mjs",
+    "fetch-data:full": "node scripts/fetch-data.mjs --full"
   },
   "dependencies": {
     "lightweight-charts": "^5.2.0",

@@ -4,11 +4,11 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '0 22 * * 1-5'  # weekdays at 10pm UTC — refreshes after US market close
+    - cron: '0 22 * * 1-5'  # weekdays at 10pm UTC — after US market close
   workflow_dispatch:           # manual trigger from GitHub Actions UI
 
 permissions:
-  contents: read
+  contents: write  # needed to commit updated CSVs back to main
   pages: write
   id-token: write
 
@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v4
         with:
@@ -29,9 +31,22 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build
+      - name: Update market data
+        run: node scripts/fetch-data.mjs
         env:
-          NEXT_PUBLIC_TIINGO_API_KEY: ${{ secrets.TIINGO_API_KEY }}
+          TIINGO_API_KEY: ${{ secrets.TIINGO_API_KEY }}
+
+      - name: Commit updated CSV data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/
+          git diff --staged --quiet || git commit -m "chore: update market data [skip ci]"
+          git push || true
+
+      - name: Build
+        run: npm run build
+        env:
           NEXT_PUBLIC_BASE_PATH: /markets-dashboard
 
       - uses: actions/configure-pages@v4
