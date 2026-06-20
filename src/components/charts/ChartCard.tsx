@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function ChartCard({ instrument }: Props) {
-  const { data, error, isLoading } = useChartData(instrument.key);
+  const { data, error, isLoading } = useChartData(instrument);
 
   const { ema50, ema200, borderColor, changeText, changeColor } = useMemo(() => {
     if (!data || data.length < 2) {

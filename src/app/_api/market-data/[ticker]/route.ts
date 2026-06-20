@@ -1,3 +1,7 @@
+// Server-side Tiingo proxy route — for Node.js/Vercel deployments only.
+// To activate: move this file to src/app/api/market-data/[ticker]/route.ts
+// and remove `output: 'export'` from next.config.ts.
+// Not used in the GitHub Pages static build (client fetches Tiingo directly).
 import { NextRequest, NextResponse } from 'next/server';
 import { INSTRUMENTS } from '@/lib/chartConfig';
 import { fetchStockData, fetchForexData } from '@/lib/tiingo';
