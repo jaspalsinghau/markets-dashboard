@@ -119,14 +119,11 @@ export default function HomePage() {
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
-            <Link href="/dashboards/markets" className="btn btn--primary">
-              View Markets Overview
-            </Link>
             <a
               href="https://github.com/jaspalsinghau/experiments-with-claude"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn--ghost"
+              className="btn btn--primary"
             >
               View on GitHub ↗
             </a>
