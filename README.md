@@ -49,7 +49,7 @@ GitHub Actions (scheduled Mon–Fri, 22:00 UTC)
     │
     ├─ Commits updated CSVs to main  (public/data/{TICKER}.csv)
     │
-    └─ npm run build  (NEXT_PUBLIC_BASE_PATH=/markets-dashboard)
+    └─ npm run build  (NEXT_PUBLIC_BASE_PATH=/experiments-with-claude)
             Static export → _site/
             Deployed to GitHub Pages
 ```
@@ -106,7 +106,7 @@ NEXT_PUBLIC_BASE_PATH= npm run build
 1. Fork or clone this repo.
 2. Go to **Settings → Pages** → set Source to **GitHub Actions**.
 3. Go to **Settings → Secrets → Actions** → add `TIINGO_API_KEY` with your Tiingo API token.
-4. Push to `main` — the workflow runs automatically and deploys the site to `https://<username>.github.io/markets-dashboard/`.
+4. Push to `main` — the workflow runs automatically and deploys the site to `https://<username>.github.io/experiments-with-claude/`.
 
 The workflow also runs on a weekday schedule (Mon–Fri 22:00 UTC) to keep data current. You can trigger it manually via **Actions → deploy → Run workflow**.
 
