@@ -340,18 +340,6 @@ export default function HomePage() {
             </div>
 
             <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
-              <Link href="/" style={{ fontSize: '0.875rem', color: 'var(--grey-500)', textDecoration: 'none', transition: 'color 0.2s' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--paper)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--grey-500)')}
-              >
-                Home
-              </Link>
-              <Link href="/dashboards/markets" style={{ fontSize: '0.875rem', color: 'var(--grey-500)', textDecoration: 'none', transition: 'color 0.2s' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--paper)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--grey-500)')}
-              >
-                Markets Overview
-              </Link>
               <a href="https://github.com/jaspalsinghau/experiments-with-claude" target="_blank" rel="noopener noreferrer"
                 style={{ fontSize: '0.875rem', color: 'var(--grey-500)', textDecoration: 'none', transition: 'color 0.2s' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--paper)')}
