@@ -8,7 +8,7 @@ const experiments = [
     href: '/dashboards/markets',
     icon: '📈',
     title: 'Markets Overview',
-    description: 'Daily candlestick charts for global equity indices, gold, and AUD/USD with EMA 50/200 overlays. 1D / 1W / 1M bar granularity toggle.',
+    description: 'A dashboard of daily candlestick charts for global equity indices, commodities, and FX, built with Next.js and served as a static site on GitHub Pages. Price data is fetched from the Tiingo API via a scheduled GitHub Actions workflow and stored as CSV files — the browser never calls Tiingo directly.',
   },
 ];
 
@@ -175,7 +175,7 @@ export default function HomePage() {
             Each project is a standalone experiment — a real tool I actually use, built end-to-end with Claude Code.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             {experiments.map((exp, i) => (
               <Link
                 key={exp.href}
