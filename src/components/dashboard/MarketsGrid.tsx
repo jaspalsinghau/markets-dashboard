@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { INSTRUMENTS } from '@/lib/chartConfig';
 import ChartCard from '@/components/charts/ChartCard';
+import DataStatusBar from '@/components/dashboard/DataStatusBar';
 import type { Period } from '@/types/market';
 
 const PERIODS: Period[] = ['1D', '1W', '1M'];
@@ -12,6 +13,10 @@ export default function MarketsGrid() {
 
   return (
     <div>
+      <div className="px-4 py-2">
+        <DataStatusBar />
+      </div>
+
       <div className="flex items-center gap-1 px-4 py-2">
         {PERIODS.map((p) => (
           <button
