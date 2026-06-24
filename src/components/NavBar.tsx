@@ -11,7 +11,7 @@ export default function NavBar() {
       WebkitBackdropFilter: 'saturate(160%) blur(14px)',
       borderBottom: '1px solid var(--grey-100)',
     }}>
-      <div style={{ maxWidth: 'var(--maxw)', margin: '0 auto', padding: '0 1.5rem', display: 'flex', alignItems: 'center', height: '62px' }}>
+      <div style={{ padding: '0 1.5rem', display: 'flex', alignItems: 'center', height: '62px' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', textDecoration: 'none', flexShrink: 0 }}>
           <span style={{
             width: 34,
